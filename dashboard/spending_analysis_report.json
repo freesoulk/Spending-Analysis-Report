@@ -1,0 +1,48 @@
+{
+  "dashboard_name": "Spending Analysis Report",
+  "dashboard_id": "01f1d21dd14811119828067d5218b5ad",
+  "platform": "Databricks AI/BI Dashboards (Lakeview)",
+  "data_source": "workspace.s_expenses.s3_expenses",
+  "dataset": {
+    "name": "s3_expenses",
+    "columns": ["report_month", "category", "total_amount"]
+  },
+  "widgets": [
+    {
+      "name": "Dashboard Heading",
+      "type": "text_box",
+      "description": "Title and overview of what the dashboard provides"
+    },
+    {
+      "name": "Report Month",
+      "type": "filter-single-select",
+      "description": "Single-select dropdown to filter all widgets to a specific month or All",
+      "field": "report_month"
+    },
+    {
+      "name": "Total Spends by Month",
+      "type": "line",
+      "description": "Line chart showing sum of all category spends per month, sorted chronologically",
+      "x_axis": "report_month",
+      "y_axis": "SUM(total_amount)",
+      "mark": "smooth",
+      "insight": "Spending ranges from ~28K in July to ~83K in October"
+    },
+    {
+      "name": "Expenses by Category",
+      "type": "pie",
+      "description": "Pie chart faceted by report_month, showing category breakdown per month",
+      "angle": "SUM(total_amount)",
+      "color": "category",
+      "facet": "report_month"
+    },
+    {
+      "name": "Detailed Table",
+      "type": "table",
+      "description": "Row-level records for drill-down",
+      "columns": ["report_month", "category", "total_amount"],
+      "items_per_page": 25
+    }
+  ],
+  "notes": "Track monthly spending trends, see which categories drive costs, and drill into underlying records."
+}

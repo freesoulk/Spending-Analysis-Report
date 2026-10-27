@@ -1,0 +1,35 @@
+{
+  "job_name": "Gdrive_raw_silver",
+  "job_id": 673460175824884,
+  "description": "Lakeflow Job orchestrating the full expense analytics pipeline: raw Google Drive ingestion followed by silver/gold transformations",
+  "max_concurrent_runs": 1,
+  "performance_target": "PERFORMANCE_OPTIMIZED",
+  "tasks": [
+    {
+      "task_key": "raw_ingest",
+      "description": "Runs the GDrive_ingest managed ingestion pipeline to load raw expense CSVs from Google Drive into workspace.gdriveingest.expenses",
+      "pipeline_task": {
+        "pipeline_id": "d9e4aba9-4cd7-404b-9516-48aae982d053",
+        "pipeline_name": "GDrive_ingest",
+        "full_refresh": true
+      },
+      "run_if": "ALL_SUCCESS"
+    },
+    {
+      "task_key": "Silver_transform",
+      "description": "Runs the B_S_expenses Spark Declarative Pipeline (Bronze -> Silver -> Gold transformations) after raw ingestion completes",
+      "pipeline_task": {
+        "pipeline_id": "ce5b572b-64f0-4796-8101-0e4cc1c63e70",
+        "pipeline_name": "B_S_expenses",
+        "full_refresh": true
+      },
+      "depends_on": ["raw_ingest"],
+      "run_if": "ALL_SUCCESS"
+    }
+  ],
+  "run_history": {
+    "total_runs": 5,
+    "all_success": true,
+    "last_run_status": "SUCCESS"
+  }
+}

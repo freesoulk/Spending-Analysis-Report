@@ -1,5 +1,9 @@
 # 💰 Spending Analysis Report
 
+The Problem Statement : Daily financial transactions across various platforms are currently consolidated through manual, daily entry into a single spreadsheet. This approach successfully captures the raw data but fails to provide structured, automated analytics.
+
+The Goal : To establish a method that takes this manually updated, centralized daily log and automatically extracts monthly, category-wise spending insights to better understand financial habits.
+
 > An end-to-end personal finance analytics pipeline built on Databricks — from raw Google Drive expense logs to an interactive BI dashboard.
 
 ## 📌 Project Overview
